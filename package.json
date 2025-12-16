@@ -1,0 +1,11 @@
+{
+  "name": "english-test-system",
+  "version": "1.0.0",
+  "description": "Online English Test System with Telegram Reporting",
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
