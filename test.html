@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Test - In Progress</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="test-container">
+        <!-- Timer and Header -->
+        <div class="test-header">
+            <div class="student-info">
+                <span id="displayName"></span> | <span id="displayGroup"></span>
+            </div>
+            <div class="timer-container">
+                <div class="timer" id="timer">15:00</div>
+                <div class="leave-warning" id="leaveWarning">
+                    Page leaves: <span id="leaveCount">0</span>/3
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Instructions -->
+        <div class="instructions">
+            <p><strong>Instructions:</strong> Choose the correct word or words to complete each sentence.</p>
+        </div>
+        
+        <!-- Test Form -->
+        <form id="testForm">
+            <div class="question">
+                <h3>1. The library is open ______ 10 a.m. ______ 8 p.m.</h3>
+                <label><input type="radio" name="q1" value="a"> a) since / for</label><br>
+                <label><input type="radio" name="q1" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q1" value="c"> c) for / until</label><br>
+                <label><input type="radio" name="q1" value="d"> d) since / until</label>
+            </div>
+            
+            <div class="question">
+                <h3>2. I have studied English ______ three years.</h3>
+                <label><input type="radio" name="q2" value="a"> a) from</label><br>
+                <label><input type="radio" name="q2" value="b"> b) since</label><br>
+                <label><input type="radio" name="q2" value="c"> c) until</label><br>
+                <label><input type="radio" name="q2" value="d"> d) for</label>
+            </div>
+            
+            <div class="question">
+                <h3>3. She has lived here ______ 2020.</h3>
+                <label><input type="radio" name="q3" value="a"> a) for</label><br>
+                <label><input type="radio" name="q3" value="b"> b) until</label><br>
+                <label><input type="radio" name="q3" value="c"> c) since</label><br>
+                <label><input type="radio" name="q3" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>4. We watched a movie ______ two hours.</h3>
+                <label><input type="radio" name="q4" value="a"> a) from</label><br>
+                <label><input type="radio" name="q4" value="b"> b) since</label><br>
+                <label><input type="radio" name="q4" value="c"> c) for</label><br>
+                <label><input type="radio" name="q4" value="d"> d) until</label>
+            </div>
+            
+            <div class="question">
+                <h3>5. Please wait ______ I finish my work.</h3>
+                <label><input type="radio" name="q5" value="a"> a) for</label><br>
+                <label><input type="radio" name="q5" value="b"> b) from</label><br>
+                <label><input type="radio" name="q5" value="c"> c) until</label><br>
+                <label><input type="radio" name="q5" value="d"> d) since</label>
+            </div>
+            
+            <div class="question">
+                <h3>6. The concert lasted ______ 7 p.m. ______ 10 p.m.</h3>
+                <label><input type="radio" name="q6" value="a"> a) for / to</label><br>
+                <label><input type="radio" name="q6" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q6" value="c"> c) since / for</label><br>
+                <label><input type="radio" name="q6" value="d"> d) until / since</label>
+            </div>
+            
+            <div class="question">
+                <h3>7. They will be on vacation ______ next Friday.</h3>
+                <label><input type="radio" name="q7" value="a"> a) for</label><br>
+                <label><input type="radio" name="q7" value="b"> b) to</label><br>
+                <label><input type="radio" name="q7" value="c"> c) since</label><br>
+                <label><input type="radio" name="q7" value="d"> d) until</label>
+            </div>
+            
+            <div class="question">
+                <h3>8. I worked at that company ______ 2018 ______ 2021.</h3>
+                <label><input type="radio" name="q8" value="a"> a) since / for</label><br>
+                <label><input type="radio" name="q8" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q8" value="c"> c) for / until</label><br>
+                <label><input type="radio" name="q8" value="d"> d) since / until</label>
+            </div>
+            
+            <div class="question">
+                <h3>9. He slept ______ only five hours last night.</h3>
+                <label><input type="radio" name="q9" value="a"> a) since</label><br>
+                <label><input type="radio" name="q9" value="b"> b) until</label><br>
+                <label><input type="radio" name="q9" value="c"> c) for</label><br>
+                <label><input type="radio" name="q9" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>10. I haven't eaten anything ______ breakfast.</h3>
+                <label><input type="radio" name="q10" value="a"> a) for</label><br>
+                <label><input type="radio" name="q10" value="b"> b) since</label><br>
+                <label><input type="radio" name="q10" value="c"> c) until</label><br>
+                <label><input type="radio" name="q10" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>11. The season runs ______ spring ______ autumn.</h3>
+                <label><input type="radio" name="q11" value="a"> a) for / to</label><br>
+                <label><input type="radio" name="q11" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q11" value="c"> c) since / for</label><br>
+                <label><input type="radio" name="q11" value="d"> d) until / since</label>
+            </div>
+            
+            <div class="question">
+                <h3>12. Can you stay with me ______ the bus comes?</h3>
+                <label><input type="radio" name="q12" value="a"> a) for</label><br>
+                <label><input type="radio" name="q12" value="b"> b) since</label><br>
+                <label><input type="radio" name="q12" value="c"> c) until</label><br>
+                <label><input type="radio" name="q12" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>13. We drove ______ six hours to get to the beach.</h3>
+                <label><input type="radio" name="q13" value="a"> a) from</label><br>
+                <label><input type="radio" name="q13" value="b"> b) since</label><br>
+                <label><input type="radio" name="q13" value="c"> c) until</label><br>
+                <label><input type="radio" name="q13" value="d"> d) for</label>
+            </div>
+            
+            <div class="question">
+                <h3>14. She has been my teacher ______ last September.</h3>
+                <label><input type="radio" name="q14" value="a"> a) for</label><br>
+                <label><input type="radio" name="q14" value="b"> b) from</label><br>
+                <label><input type="radio" name="q14" value="c"> c) until</label><br>
+                <label><input type="radio" name="q14" value="d"> d) since</label>
+            </div>
+            
+            <div class="question">
+                <h3>15. The shop is closed ______ 1 p.m. ______ 2 p.m. for lunch.</h3>
+                <label><input type="radio" name="q15" value="a"> a) for / to</label><br>
+                <label><input type="radio" name="q15" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q15" value="c"> c) since / for</label><br>
+                <label><input type="radio" name="q15" value="d"> d) until / since</label>
+            </div>
+            
+            <div class="question">
+                <h3>16. I will read this book ______ the end of the week.</h3>
+                <label><input type="radio" name="q16" value="a"> a) for</label><br>
+                <label><input type="radio" name="q16" value="b"> b) until</label><br>
+                <label><input type="radio" name="q16" value="c"> c) since</label><br>
+                <label><input type="radio" name="q16" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>17. They talked on the phone ______ 30 minutes.</h3>
+                <label><input type="radio" name="q17" value="a"> a) from</label><br>
+                <label><input type="radio" name="q17" value="b"> b) since</label><br>
+                <label><input type="radio" name="q17" value="c"> c) for</label><br>
+                <label><input type="radio" name="q17" value="d"> d) until</label>
+            </div>
+            
+            <div class="question">
+                <h3>18. He has been gone ______ a long time.</h3>
+                <label><input type="radio" name="q18" value="a"> a) until</label><br>
+                <label><input type="radio" name="q18" value="b"> b) for</label><br>
+                <label><input type="radio" name="q18" value="c"> c) since</label><br>
+                <label><input type="radio" name="q18" value="d"> d) from</label>
+            </div>
+            
+            <div class="question">
+                <h3>19. My class is ______ Monday ______ Wednesday.</h3>
+                <label><input type="radio" name="q19" value="a"> a) since / for</label><br>
+                <label><input type="radio" name="q19" value="b"> b) from / to</label><br>
+                <label><input type="radio" name="q19" value="c"> c) for / until</label><br>
+                <label><input type="radio" name="q19" value="d"> d) since / until</label>
+            </div>
+            
+            <div class="question">
+                <h3>20. I didn't see her ______ last year's party.</h3>
+                <label><input type="radio" name="q20" value="a"> a) for</label><br>
+                <label><input type="radio" name="q20" value="b"> b) until</label><br>
+                <label><input type="radio" name="q20" value="c"> c) since</label><br>
+                <label><input type="radio" name="q20" value="d"> d) from</label>
+            </div>
+            
+            <div class="submit-container">
+                <button type="submit" class="btn-submit">Submit Test</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Results Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <h2>Test Submitted Successfully! ✅</h2>
+            <p id="resultMessage">Your answers have been submitted. The teacher has been notified via Telegram.</p>
+            <p><strong>Time taken:</strong> <span id="timeTaken"></span></p>
+            <button onclick="window.location.href='login.html'" class="btn-return">Return to Login</button>
+        </div>
+    </div>
+    
+    <script>
+        // Student info
+        const studentName = localStorage.getItem('studentName');
+        const studentGroup = localStorage.getItem('studentGroup');
+        
+        if (!studentName || !studentGroup) {
+            window.location.href = 'login.html';
+        }
+        
+        document.getElementById('displayName').textContent = studentName;
+        document.getElementById('displayGroup').textContent = studentGroup;
+        
+        // Timer functionality
+        let timeLeft = 15 * 60; // 15 minutes in seconds
+        let timerInterval;
+        
+        function startTimer() {
+            if (localStorage.getItem('testStarted') === 'true') return;
+            localStorage.setItem('testStarted', 'true');
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitTest();
+                }
+            }, 1000);
+        }
+        
+        // Page leave tracking
+        let pageLeaves = parseInt(localStorage.getItem('pageLeaves') || 0);
+        document.getElementById('leaveCount').textContent = pageLeaves;
+        
+        function trackPageLeave() {
+            pageLeaves++;
+            localStorage.setItem('pageLeaves', pageLeaves);
+            document.getElementById('leaveCount').textContent = pageLeaves;
+            
+            if (pageLeaves >= 3) {
+                alert('You have left the page too many times. Test will be submitted automatically.');
+                submitTest();
+            } else if (pageLeaves === 1) {
+                alert('Warning! You have left the page. Do this 2 more times and your test will be auto-submitted.');
+            } else if (pageLeaves === 2) {
+                alert('Final warning! One more page leave will auto-submit your test!');
+            }
+        }
+        
+        // Event listeners for page visibility
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                trackPageLeave();
+            }
+        });
+        
+        // Submit function
+        async function submitTest() {
+            clearInterval(timerInterval);
+            
+            const formData = new FormData(document.getElementById('testForm'));
+            const answers = {};
+            
+            for (let i = 1; i <= 20; i++) {
+                answers[`q${i}`] = formData.get(`q${i}`) || 'unanswered';
+            }
+            
+            const submissionData = {
+                studentName,
+                studentGroup,
+                answers,
+                timeTaken: (15 * 60 - timeLeft),
+                submittedAt: new Date().toISOString(),
+                pageLeaves
+            };
+            
+            try {
+                const response = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(submissionData)
+                });
+                
+                if (response.ok) {
+                    showResultModal();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert('Submission failed, but your answers were saved locally.');
+                localStorage.setItem('testAnswers', JSON.stringify(answers));
+                showResultModal();
+            }
+        }
+        
+        function showResultModal() {
+            const minutes = Math.floor((15 * 60 - timeLeft) / 60);
+            const seconds = (15 * 60 - timeLeft) % 60;
+            document.getElementById('timeTaken').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            document.getElementById('resultModal').style.display = 'block';
+            
+            // Clear localStorage
+            localStorage.removeItem('testStarted');
+            localStorage.removeItem('pageLeaves');
+        }
+        
+        // Form submission
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to submit your test?')) {
+                submitTest();
+            }
+        });
+        
+        // Start timer when page loads
+        window.onload = startTimer;
+    </script>
+</body>
+</html>
