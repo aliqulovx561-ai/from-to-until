@@ -1,10 +1,11 @@
-const fetch = require('node-fetch');
+// Use ES module syntax for Node.js 24
+import fetch from 'node-fetch';
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     // Enable CORS
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     
     if (req.method === 'OPTIONS') {
@@ -16,7 +17,14 @@ module.exports = async (req, res) => {
     }
     
     try {
-        const submission = req.body;
+        let submission;
+        
+        // Parse JSON body
+        if (typeof req.body === 'string') {
+            submission = JSON.parse(req.body);
+        } else {
+            submission = req.body;
+        }
         
         // Telegram bot configuration from environment variables
         const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -24,10 +32,13 @@ module.exports = async (req, res) => {
         
         if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
             console.error('Telegram bot configuration missing');
-            return res.status(500).json({ error: 'Server configuration error' });
+            return res.status(500).json({ 
+                error: 'Server configuration error',
+                message: 'Telegram credentials not configured'
+            });
         }
         
-        // Calculate score (using answer key from earlier)
+        // Calculate score
         const answerKey = {
             q1: 'b', q2: 'd', q3: 'c', q4: 'c', q5: 'c',
             q6: 'b', q7: 'd', q8: 'b', q9: 'c', q10: 'b',
@@ -48,7 +59,7 @@ module.exports = async (req, res) => {
             
             detailedAnswers.push({
                 question: i,
-                studentAnswer,
+                studentAnswer: studentAnswer || 'No answer',
                 correctAnswer,
                 isCorrect
             });
@@ -56,26 +67,36 @@ module.exports = async (req, res) => {
         
         const percentage = (score / 20) * 100;
         
+        // Format time taken
+        const timeTaken = submission.timeTaken || 0;
+        const minutes = Math.floor(timeTaken / 60);
+        const seconds = timeTaken % 60;
+        const timeFormatted = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
         // Create detailed report
         const report = `
 📚 *NEW TEST SUBMISSION*
 
-👤 *Student:* ${submission.studentName}
-🏫 *Group:* ${submission.studentGroup}
-⏱️ *Time Taken:* ${Math.floor(submission.timeTaken / 60)}:${(submission.timeTaken % 60).toString().padStart(2, '0')}
-📅 *Submitted:* ${new Date(submission.submittedAt).toLocaleString()}
-🚪 *Page Leaves:* ${submission.pageLeaves}
+👤 *Student:* ${submission.studentName || 'Unknown'}
+🏫 *Group:* ${submission.studentGroup || 'Unknown'}
+⏱️ *Time Taken:* ${timeFormatted}
+📅 *Submitted:* ${new Date().toLocaleString()}
+🚪 *Page Leaves:* ${submission.pageLeaves || 0}
 
 📊 *SCORE: ${score}/20 (${percentage.toFixed(1)}%)*
 
 ${percentage >= 75 ? '✅ EXCELLENT!' : percentage >= 50 ? '⚠️ NEEDS PRACTICE' : '❌ NEEDS IMPROVEMENT'}
 
-*Detailed Breakdown:*
-${detailedAnswers.map(a => 
-    `Q${a.question}: ${a.studentAnswer || 'No answer'} ${a.isCorrect ? '✅' : `❌ (Correct: ${a.correctAnswer})`}`
-).join('\n')}
+*Answers Summary:*
+${detailedAnswers.slice(0, 10).map(a => 
+    `Q${a.question}: ${a.studentAnswer} ${a.isCorrect ? '✅' : `❌`}`
+).join(' | ')}
 
-*Answers Key:*
+${detailedAnswers.slice(10).map(a => 
+    `Q${a.question}: ${a.studentAnswer} ${a.isCorrect ? '✅' : `❌`}`
+).join(' | ')}
+
+*Correct Answers Key:*
 1-5: b,d,c,c,c
 6-10: b,d,b,c,b
 11-15: b,c,d,d,b
@@ -83,37 +104,37 @@ ${detailedAnswers.map(a =>
         `.trim();
         
         // Send report to Telegram
-        const telegramResponse = await fetch(
-            `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: report,
-                    parse_mode: 'Markdown'
-                })
+        try {
+            const telegramResponse = await fetch(
+                `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: report,
+                        parse_mode: 'Markdown'
+                    })
+                }
+            );
+            
+            const telegramResult = await telegramResponse.json();
+            
+            if (!telegramResponse.ok) {
+                console.error('Telegram API error:', telegramResult);
             }
-        );
-        
-        const telegramResult = await telegramResponse.json();
-        
-        if (!telegramResponse.ok) {
-            console.error('Telegram API error:', telegramResult);
-            return res.status(500).json({ 
-                error: 'Failed to send to Telegram',
-                details: telegramResult 
-            });
+        } catch (telegramError) {
+            console.error('Failed to send to Telegram:', telegramError);
         }
         
-        // Return success response
+        // Return success response to client
         return res.status(200).json({
             success: true,
             score: `${score}/20`,
             percentage: percentage.toFixed(1),
-            telegramSent: true
+            message: 'Test submitted successfully'
         });
         
     } catch (error) {
@@ -123,4 +144,4 @@ ${detailedAnswers.map(a =>
             message: error.message 
         });
     }
-};
+}
