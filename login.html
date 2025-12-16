@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - English Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>📝 English Test System</h1>
+            <h2>Prepositions of Time Test</h2>
+            
+            <div class="warning-box">
+                <h3>⚠️ Important Instructions:</h3>
+                <ul>
+                    <li>You will have <strong>15 minutes</strong> to complete the test</li>
+                    <li>Do NOT switch tabs or leave the test page</li>
+                    <li>If you leave the page <strong>more than 3 times</strong>, your test will be automatically submitted</li>
+                    <li>All questions are multiple choice</li>
+                    <li>Timer will start as soon as you begin the test</li>
+                </ul>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="studentName">Full Name:</label>
+                    <input type="text" id="studentName" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentGroup">Group/Class:</label>
+                    <input type="text" id="studentGroup" required placeholder="e.g., Group A, Class 10B">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" required>
+                        I understand and agree to the test rules
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-start">Start Test</button>
+            </form>
+            
+            <div class="test-info">
+                <p><strong>Test Details:</strong> 20 multiple choice questions on prepositions of time (from/to, since, until, for)</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const studentName = document.getElementById('studentName').value.trim();
+            const studentGroup = document.getElementById('studentGroup').value.trim();
+            
+            if (!studentName || !studentGroup) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Store student info in localStorage
+            localStorage.setItem('studentName', studentName);
+            localStorage.setItem('studentGroup', studentGroup);
+            localStorage.setItem('pageLeaves', 0);
+            localStorage.setItem('testStarted', 'false');
+            
+            // Redirect to test page
+            window.location.href = 'test.html';
+        });
+    </script>
+</body>
+</html>
