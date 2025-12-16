@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Online English Test System with Telegram Reporting",
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^3.3.2"
   },
   "engines": {
-    "node": "18.x"
+    "node": ">=24.x"
   }
 }
